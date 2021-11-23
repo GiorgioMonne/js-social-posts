@@ -64,11 +64,47 @@ const posts = [
 
 
 
+function cambioData(data) {
+    const Now = new Date();
+    const dataInput = new Date(data);
+    const minuti = Math.round(Math.abs(Now - dataInput) / (1000 * 60));
+    if ((minuti / (60 * 24)) > 365) {
+        return Math.round(Math.abs(minuti / (60 * 24 * 365)))
+    } else if (minuti / (60 * 24) > 30) { 
+        return Math.round(Math.abs(minuti / (60 * 24 * 30)))
+    } else if ((minuti / 60) > 24) {
+        return Math.round(Math.abs(minuti / (60 * 24)))
+    } else if (minuti > 60) {
+        return Math.round(Math.abs(minuti / 60)) 
+    }
+    return minuti
+}
 
+// function addlike(num){
+//     let likecounter = num;
+//     likecounter++;
+//     return likecounter;   
+// }
+
+// let miPiaceC = 0;
 let card = "";
 
 for(let i=0; i <posts.length;i++){
+
+    // document.querySelector('.like-button').addEventListener("click", function(event) {
+    //     miPiaceC = addlike(posts[i].likes);
+    //     console.log(miPiaceC);
+    //     event.preventDefault();
+    // }, false);
+
+    // let addL = addlike(posts[i].likes);
+    // console.log(addlike(addL));
+    
+    let dataC = cambioData(posts[i].created);
+    console.log(dataC);
+    
     card += `
+    <div class="post">
     <div class="post__header">
         <div class="post-meta">                    
             <div class="post-meta__icon">
@@ -76,7 +112,7 @@ for(let i=0; i <posts.length;i++){
             </div>
             <div class="post-meta__data">
                 <div class="post-meta__author">${posts[i].author.name}</div>
-                <div class="post-meta__time">${posts[i].created}</div>
+                <div class="post-meta__time">${dataC + ' mesi fà '}</div>
                 </div>                    
             </div>
         </div>
@@ -104,9 +140,12 @@ for(let i=0; i <posts.length;i++){
                 </div> 
 
             </div>
+        </div>
     `; 
 }
 
-document.querySelector('.post').innerHTML = card;
+document.querySelector('.posts-list').innerHTML = card;
+
+
 
 
