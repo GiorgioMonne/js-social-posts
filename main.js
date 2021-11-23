@@ -65,9 +65,10 @@ const posts = [
 
 
 function cambioData(data) {
-    const Now = new Date();
-    const dataInput = new Date(data);
+    const Now = new Date();// CREO UNA NUOVA DATA (ODIERNA)
+    const dataInput = new Date(data);// MI PRENDO LA DATA DALL' ARRAY PER CONFRONTARLA CON QUELLA
     const minuti = Math.round(Math.abs(Now - dataInput) / (1000 * 60));
+    // FACCIO LA DIFFERENZA DEI MINUTI PASSATI TRA LE DUE DATE E A SECONDA DEL RISULTATO CALCOLO SE SONO PASSATE MINUTI/ORE/GIORNI/MESI/ANNI
     if ((minuti / (60 * 24)) > 365) {
         return Math.round(Math.abs(minuti / (60 * 24 * 365)))
     } else if (minuti / (60 * 24) > 30) { 
